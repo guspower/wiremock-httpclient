@@ -2,7 +2,7 @@ defaultTasks 'runHttpClient'
 
 ext {
     dependencyVersions = [
-        jodd            : "3.6.6",
+        httpclient      : "4.5",
         log4j           : "2.5",
         slf4j           : "1.7.12",
         wiremock        : "2.0.10-beta"
@@ -34,7 +34,7 @@ allprojects {
 apply plugin: 'java'
 
 dependencies {
-    compile "org.apache.httpcomponents:httpclient:4.5"
+    compile "org.apache.httpcomponents:httpclient:${dependencyVersions["httpclient"]}"
     compile "com.github.tomakehurst:wiremock:${dependencyVersions["wiremock"]}"
 }
 

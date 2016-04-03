@@ -26,6 +26,7 @@ public class RunHttpClient {
     }
 
     public void run() {
+        printSystem();
         endTime = calculateEndTime();
 
         while(keepRunning()) {
@@ -39,6 +40,17 @@ public class RunHttpClient {
                 handleIOException(unexpected);
             }
         }
+    }
+
+    private void printSystem() {
+        System.out.println("JVM:");
+        System.getProperties().forEach((key, value) -> {
+                    if (key.toString().startsWith("java.vm")) {
+                        System.out.println(value);
+                    }
+                }
+        );
+        System.out.println("");
     }
 
     private boolean keepRunning() {

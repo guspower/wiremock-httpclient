@@ -1,4 +1,4 @@
-# WireMock http client test
+# WireMock Apache Httpclient test
 
 An attempt to replicate [WireMock issue #381](https://github.com/tomakehurst/wiremock/pull/381)
 
@@ -10,7 +10,7 @@ An attempt to replicate [WireMock issue #381](https://github.com/tomakehurst/wir
 
  * Run the target server 
  
-    ./gradlew -p site run
+    ./gradlew -p server run
     
  * Run the test in another console 
  
@@ -18,5 +18,6 @@ An attempt to replicate [WireMock issue #381](https://github.com/tomakehurst/wir
     
 ## How it works
 
-RunHttpClient.java uses the WireMock HttpClientFactory to run get requests in a tight loop for a set period. 
+RunHttpClient.java uses the [WireMock HttpClientFactory](https://github.com/tomakehurst/wiremock/blob/cf6cdefbe8f38da8d53480a5e231586ce46cf018/src/main/java/com/github/tomakehurst/wiremock/http/HttpClientFactory.java) to run get requests in a tight loop for a set period. 
+The target server is configured to return 204 for all incoming requests.
 Proof of issue replication comes from the detection of a NoHttpResponseException.
