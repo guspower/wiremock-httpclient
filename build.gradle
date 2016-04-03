@@ -1,0 +1,44 @@
+defaultTasks 'runHttpClient'
+
+ext {
+    dependencyVersions = [
+        jodd            : "3.6.6",
+        log4j           : "2.5",
+        slf4j           : "1.7.12",
+        wiremock        : "2.0.10-beta"
+    ]
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.ratpack:ratpack-gradle:1.2.0"
+    }
+}
+
+
+allprojects {
+    apply plugin: 'idea'
+
+    repositories {
+        mavenCentral()
+        maven { url "https://oss.jfrog.org/repo" }
+    }
+}
+
+apply plugin: 'java'
+
+dependencies {
+    compile "org.apache.httpcomponents:httpclient:4.5"
+    compile "com.github.tomakehurst:wiremock:${dependencyVersions["wiremock"]}"
+}
+
+task runHttpClient(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'org.wiremock.httpclient.RunHttpClient'
+}
